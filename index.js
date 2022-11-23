@@ -43,7 +43,7 @@ function broadcastMessage(message, id) {
 app.post('/register',UserController.register)
 app.post('/sendMessage',UserController.sendMessage)
 app.get('/findMessage',UserController.findMessage)
-app.get('/getAllUsers',UserController.getAllUsers)
+app.post('/getAllUsers',UserController.getAllUsers)
 app.get('/allUsersMessage',UserController.allUsersMessage)
 
 app.listen(5000,(err) =>{

@@ -86,6 +86,7 @@ export const allUsersMessage = async(req, res) => {
 }
 export const getAllUsers = async(req, res) => {
     try{
+        console.log(req.body.userName)
         const users = await User.find({userName:{$ne:req.body.userName}}).lean().orFail()
         res.json(users)
     }catch(err){
