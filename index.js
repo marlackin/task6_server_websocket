@@ -1,8 +1,23 @@
-const ws = require('ws');
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+import { WebSocketServer } from "ws";
+import * as UserController from './UserController.js'
 
-const wss = new ws.Server({
-    port: 5000,
-}, () => console.log(`Server started on 5000`))
+process.env.MONGODB_URI='mongodb+srv://admin:admin@cluster0.d2py2e4.mongodb.net/task4?retryWrites=true&w=majority'
+mongoose.connect(process.env.MONGODB_URI)
+.then(()=> console.log('DB OK'))
+.catch((err)=>console.log('DB ERROR',err))
+
+const app = express();
+app.use(cors())
+
+app.use(express.json())
+
+const wss = new WebSocketServer({
+    port: 7000,
+}, () => console.log(`wss started on 7000`))
+
 
 
 wss.on('connection', function connection(ws) {
@@ -24,3 +39,16 @@ function broadcastMessage(message, id) {
         client.send(JSON.stringify(message))
     })
 }
+
+app.post('/register',UserController.register)
+app.post('/sendMessage',UserController.sendMessage)
+app.get('/findMessage',UserController.findMessage)
+app.get('/getAllUsers',UserController.getAllUsers)
+app.get('/allUsersMessage',UserController.allUsersMessage)
+
+app.listen(5000,(err) =>{
+    if (err) {
+        console.error(err);
+    }
+    console.log('server listening on port 5000')
+})
