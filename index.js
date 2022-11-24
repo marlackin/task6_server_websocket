@@ -44,7 +44,7 @@ app.post('/register',UserController.register)
 app.post('/sendMessage',UserController.sendMessage)
 app.get('/findMessage',UserController.findMessage)
 app.post('/getAllUsers',UserController.getAllUsers)
-app.get('/allUsersMessage',UserController.allUsersMessage)
+app.post('/allUsersMessage',UserController.allUsersMessage)
 
 app.listen(5000,(err) =>{
     if (err) {

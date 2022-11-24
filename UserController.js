@@ -36,12 +36,15 @@ export const register = async(req, res) => {
 
 export const sendMessage = async(req, res) => {
     try{
+        console.log(req.body)
         const doc = new Message({
             userFrom:req.body.userName,
             userTo:req.body.userTo,
             message:req.body.message,
-            theme:req.body.theme
+            theme:req.body.theme,
+            date:req.body.date,
         })
+        console.log(doc)
         const message = await doc.save()
         const {...messageData} = message._doc
             console.log('первый иф')
@@ -71,12 +74,12 @@ export const findMessage = async(req, res) => {
 }
 export const allUsersMessage = async(req, res) => {
     try{
-        const messagesFrom = await Message.find({userFrom:{$in:req.body.userName}}).lean().orFail()
-        const messagesTo = await Message.find({userTo:{$in:req.body.userName}}).lean().orFail()
-        res.json({
+        const messagesFrom = await Message.find({userFrom:{$in:req.body.userName} || {userTo:{$in:req.body.userName}}}).lean().orFail()
+        const messagesTo = await Message.find({userTo:{$in:req.body.userName}} || {userFrom:{$in:req.body.userName}}).lean().orFail()
+        res.json([
             ...messagesFrom,
             ...messagesTo
-        })
+        ])
     }catch(err){
         console.log(err)
         res.status(500).json({
