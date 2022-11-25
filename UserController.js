@@ -38,7 +38,7 @@ export const sendMessage = async(req, res) => {
     try{
         console.log(req.body)
         const doc = new Message({
-            userFrom:req.body.userName,
+            userFrom:req.body.userFrom,
             userTo:req.body.userTo,
             message:req.body.message,
             theme:req.body.theme,
