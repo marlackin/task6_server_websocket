@@ -16,7 +16,7 @@ app.use(cors())
 app.use(express.json())
 
 const wss = new WebSocketServer({
-    port: 7000,
+    app
 }, () => console.log(`wss started on 7000`))
 
 
