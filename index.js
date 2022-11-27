@@ -11,16 +11,26 @@ mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('DB OK'))
 .catch((err)=>console.log('DB ERROR',err))
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
+const app = express();
 app.use(cors())
 
 app.use(express.json())
 
+app.post('/register',UserController.register)
+app.post('/sendMessage',UserController.sendMessage)
+app.get('/findMessage',UserController.findMessage)
+app.post('/getAllUsers',UserController.getAllUsers)
+app.post('/allUsersMessage',UserController.allUsersMessage)
+
+app.listen(process.env.PORT || 5000,(err) =>{
+    if (err) {
+        console.error(err);
+    }
+    console.log('server listening on port 5000')
+})
+
 const wss = new WebSocketServer({
-    server
+    app
 }, () => console.log(`wss started on 7000`))
 
 
@@ -45,15 +55,3 @@ function broadcastMessage(message, id) {
     })
 }
 
-app.post('/register',UserController.register)
-app.post('/sendMessage',UserController.sendMessage)
-app.get('/findMessage',UserController.findMessage)
-app.post('/getAllUsers',UserController.getAllUsers)
-app.post('/allUsersMessage',UserController.allUsersMessage)
-
-app.listen(process.env.PORT || 5000,(err) =>{
-    if (err) {
-        console.error(err);
-    }
-    console.log('server listening on port 5000')
-})
