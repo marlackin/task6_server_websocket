@@ -4,19 +4,23 @@ import cors from 'cors'
 import { WebSocketServer } from "ws";
 import * as UserController from './UserController.js'
 
+
 process.env.MONGODB_URI='mongodb+srv://admin:admin@cluster0.d2py2e4.mongodb.net/task4?retryWrites=true&w=majority'
 //process.env.PORT = 5000
 mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('DB OK'))
 .catch((err)=>console.log('DB ERROR',err))
 
-const app = express();
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
 app.use(cors())
 
 app.use(express.json())
 
 const wss = new WebSocketServer({
-    app
+    server
 }, () => console.log(`wss started on 7000`))
 
 
