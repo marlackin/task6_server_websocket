@@ -6,7 +6,7 @@ import * as UserController from './UserController.js'
 
 
 process.env.MONGODB_URI='mongodb+srv://admin:admin@cluster0.d2py2e4.mongodb.net/task4?retryWrites=true&w=majority'
-//process.env.PORT = 5000
+process.env.PORT = 5000
 mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('DB OK'))
 .catch((err)=>console.log('DB ERROR',err))
@@ -22,15 +22,15 @@ app.get('/findMessage',UserController.findMessage)
 app.post('/getAllUsers',UserController.getAllUsers)
 app.post('/allUsersMessage',UserController.allUsersMessage)
 
-app.listen($PORT || 5000,(err) =>{
+app.listen(process.env.PORT,(err) =>{
     if (err) {
         console.error(err);
     }
-    console.log('server listening on port 5000')
+    console.log(`server listening on port ${process.env.PORT}`)
 })
 
 const wss = new WebSocketServer({server:app });
-
+console.log(wss)
 
 
 wss.on('connection', function connection(ws) {
