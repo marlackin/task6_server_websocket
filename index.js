@@ -22,7 +22,7 @@ app.get('/findMessage',UserController.findMessage)
 app.post('/getAllUsers',UserController.getAllUsers)
 app.post('/allUsersMessage',UserController.allUsersMessage)
 
-app.listen(process.env.PORT || 5000,(err) =>{
+app.listen($PORT || 5000,(err) =>{
     if (err) {
         console.error(err);
     }
