@@ -22,15 +22,10 @@ app.get('/findMessage',UserController.findMessage)
 app.post('/getAllUsers',UserController.getAllUsers)
 app.post('/allUsersMessage',UserController.allUsersMessage)
 
-app.listen(process.env.PORT,(err) =>{
-    if (err) {
-        console.error(err);
-    }
-    console.log(`server listening on port ${process.env.PORT}`)
-})
+
 
 const wss = new WebSocketServer({server:app });
-console.log(wss)
+console.log(wss._server)
 
 
 wss.on('connection', function connection(ws) {
@@ -53,3 +48,9 @@ function broadcastMessage(message, id) {
     })
 }
 
+app.listen(process.env.PORT,(err) =>{
+    if (err) {
+        console.error(err);
+    }
+    console.log(`server listening on port ${process.env.PORT}`)
+})
