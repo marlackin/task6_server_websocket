@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const app = express();
 app.use(cors())
 
+
 app.use(express.json())
 
 app.post('/register',UserController.register)
@@ -25,8 +26,9 @@ app.post('/allUsersMessage',UserController.allUsersMessage)
 
 
 // const wss = new WebSocketServer({server:app });
-const wss = new WebSocketServer({host:"task6serverwebsocket-production.up.railway.app",port:5000 });
+const wss = new WebSocketServer({host:"wss://task6serverwebsocket-production.up.railway.app",port:5000 });
 //const wss = new WebSocketServer({host:"localhost",port:5000 });
+
 //const wss = new WebSocketServer({port:7000 });
 console.log(wss._server)
 
