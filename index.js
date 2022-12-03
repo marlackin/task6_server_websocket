@@ -26,7 +26,7 @@ app.post('/allUsersMessage',UserController.allUsersMessage)
 
 
 // const wss = new WebSocketServer({server:app });
-const wss = new WebSocketServer({host:"wss://task6serverwebsocket-production.up.railway.app",port:5000 });
+const wss = new WebSocketServer({host:"task6serverwebsocket-production.up.railway.app:5000/ws",noServer:true });
 //const wss = new WebSocketServer({host:"localhost",port:5000 });
 
 //const wss = new WebSocketServer({port:7000 });
