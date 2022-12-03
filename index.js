@@ -6,7 +6,7 @@ import * as UserController from './UserController.js'
 
 
 process.env.MONGODB_URI='mongodb+srv://admin:admin@cluster0.d2py2e4.mongodb.net/task4?retryWrites=true&w=majority'
-process.env.PORT = 5000
+// process.env.PORT = 5000
 mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('DB OK'))
 .catch((err)=>console.log('DB ERROR',err))
@@ -24,6 +24,7 @@ app.post('/allUsersMessage',UserController.allUsersMessage)
 
 
 
+// const wss = new WebSocketServer({server:app });
 const wss = new WebSocketServer({port:7000 });
 console.log(wss._server)
 
@@ -48,7 +49,7 @@ function broadcastMessage(message, id) {
     })
 }
 
-app.listen(process.env.PORT,(err) =>{
+app.listen(5000,(err) =>{
     if (err) {
         console.error(err);
     }
