@@ -24,8 +24,8 @@ app.post('/allUsersMessage',UserController.allUsersMessage)
 
 
 
-// const wss = new WebSocketServer({server:app });
-const wss = new WebSocketServer({port:7000 });
+const wss = new WebSocketServer({server:app });
+//const wss = new WebSocketServer({port:7000 });
 console.log(wss._server)
 
 
@@ -49,7 +49,7 @@ function broadcastMessage(message, id) {
     })
 }
 
-app.listen(5000,(err) =>{
+app.listen(process.env.PORT,(err) =>{
     if (err) {
         console.error(err);
     }
