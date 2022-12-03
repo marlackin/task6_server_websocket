@@ -11,8 +11,13 @@ mongoose.connect(process.env.MONGODB_URI)
 .then(()=> console.log('DB OK'))
 .catch((err)=>console.log('DB ERROR',err))
 
+var corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200 // For legacy browser support
+}
+
 const app = express();
-app.use(cors())
+app.use(cors(corsOptions))
 
 
 app.use(express.json())
