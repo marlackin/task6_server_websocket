@@ -53,9 +53,9 @@ function broadcastMessage(message, id) {
     })
 }
 
-app.listen(PORT,(err) =>{
+app.listen(process.env.PORT,(err) =>{
     if (err) {
         console.error(err);
     }
-    console.log(`server listening on port 5000`)
+    console.log(`server listening on port ${process.env.PORT}`)
 })
